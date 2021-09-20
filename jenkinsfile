@@ -4,7 +4,9 @@ node {   def registry = 'registry.hub.docker.com/xxxxxx/test'
     stage('Git') {
         git 'https://github.com/jilu407/angular-github-actions-s3-deploy.git'
     }
-    stage('Fossa Analyze') {
+    stage('Fossa Analyze') {{
+	  withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin'])
+	
         sh 'curl -H \'Cache-Control: no-cache\' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash'
 		sh 'which fossa'
         sh 'fossa init'
@@ -12,5 +14,6 @@ node {   def registry = 'registry.hub.docker.com/xxxxxx/test'
     }
     
    
+   }
    }
    

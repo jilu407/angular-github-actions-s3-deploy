@@ -8,7 +8,7 @@ node {   def registry = 'registry.hub.docker.com/xxxxxx/test'
 	  withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']){
 	
         sh 'curl -H \'Cache-Control: no-cache\' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash'
-		sh 'which fossa'
+		#sh 'which fossa'
         sh 'fossa init'
         sh 'FOSSA_API_KEY=fda8f189521174286901f6cd34eabfc7 fossa analyze'
     }

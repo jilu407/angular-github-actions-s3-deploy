@@ -4,15 +4,21 @@ node {   def registry = 'registry.hub.docker.com/xxxxxx/test'
     stage('Git') {
         git 'https://github.com/jilu407/angular-github-actions-s3-deploy.git'
     }
-    stage('Fossa Analyze') {
-	  withEnv(['PATH+EXTRA=/usr/sbin:/usr/bin:/sbin:/bin']){
-	
+    stage('install depedency') {
+	  
         
-		sh 'fossa init'
-        sh 'FOSSA_API_KEY=fda8f189521174286901f6cd34eabfc7 fossa analyze'
-    }
+		sh 'npm install' 
     
-   
    }
+   stage('build packaage') {
+	  
+        
+		sh 'npm run build'
    }
+   stage('run ansible play book') {
+	  
+        
+		sh 'ansible-playbook deploy.yml'
+   }
+}
    
